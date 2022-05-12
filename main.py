@@ -74,5 +74,5 @@ queries = [
 
 
 
-
+data_scraper.run(queries)
 
