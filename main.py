@@ -40,3 +40,39 @@ data_scraper = LinkedinScraper(
 )
 
 
+#add event listeners
+data_scraper.on(Events.DATA, scdata)
+data_scraper.on(Events.ERROR, err)
+data_scraper.on(Events.END, end)
+
+
+
+queries = [
+  Query(
+    options = QueryOptions(
+      optimize = True, #blocks requests for sources like images and stylesheet
+      limit = 27 #this limits the number of jobs to scrape
+    )
+  ),
+  Query(
+    query = 'Designer',
+    options = QueryOptions(
+      locations = ["United Kingdom"],
+      optimize = False,
+      apply_link = True, #try to extract apply link
+      limit = 5,
+      filters = QueryFilters(
+        company_jobs_url='https://www.linkedin.com/jobs/search?keywords=Designers&location=United%20Kingdom&0=&position=1&pageNum=0',
+        relevance = RelevanceFilters.RECENT,
+        time = TimeFilters.MONTH,
+        type = [TypeFilters.FULL_TIME, TypeFilters.INTERNSHIP],
+        expereice = None,
+      )
+    )
+  ),
+]
+
+
+
+
+
